@@ -16,20 +16,19 @@ var playButton = document.getElementById("playButton");
 
 playButton.addEventListener("click", function() {
     loadAAMPVideo();
-    var videoContainer = document.getElementById("container");
-    videoContainer.requestFullscreen().catch(error => {
-        console.log("Error attempting to enable full-screen mode:", error.message);
-    });
-});
-
-document.addEventListener("fullscreenchange", function() {
-    var videoContainer = document.getElementById("container");
-    if (document.fullscreenElement) {
-        videoContainer.style.display = "none";
-    } else {
-        videoContainer.style.display = "block";
+    var video = document.getElementById("video");
+    if (video.requestFullscreen) {
+        video.requestFullscreen();
+    } else if (video.mozRequestFullScreen) {
+        video.mozRequestFullScreen();
+    } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+    } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
     }
 });
+
+
 
 // var url = "aamps://dash.akamaized.net/dash264/TestCasesMCA/dolby/3/1/ChID_voices_20_128_ddp.mpd";
 // var player;
